@@ -3,10 +3,12 @@ Object = "{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}#1.1#0"; "ieframe.dll"
 Begin VB.Form Form3 
    BackColor       =   &H8000000E&
    BorderStyle     =   1  'Fixed Single
+   Caption         =   "                                                                                                                      Ð¡´°Ä£Ê½"
    ClientHeight    =   8595
    ClientLeft      =   4245
    ClientTop       =   2490
    ClientWidth     =   13515
+   ControlBox      =   0   'False
    FillColor       =   &H00FFFFFF&
    Icon            =   "Form3.frx":0000
    LinkTopic       =   "Form3"
@@ -15,6 +17,23 @@ Begin VB.Form Form3
    ScaleHeight     =   8595
    ScaleWidth      =   13515
    StartUpPosition =   2  'ÆÁÄ»ÖÐÐÄ
+   Begin VB.CommandButton Command3 
+      Caption         =   "¹ØÓÚ"
+      BeginProperty Font 
+         Name            =   "Î¢ÈíÑÅºÚ"
+         Size            =   9
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Left            =   10680
+      TabIndex        =   8
+      Top             =   0
+      Width           =   735
+   End
    Begin VB.CommandButton Command2 
       Caption         =   "Ö÷Ò³"
       BeginProperty Font 
@@ -111,7 +130,7 @@ Begin VB.Form Form3
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   10680
+      Left            =   11520
       MaskColor       =   &H00808080&
       TabIndex        =   2
       Top             =   0
@@ -121,7 +140,7 @@ Begin VB.Form Form3
       Caption         =   "¡ú"
       BeginProperty Font 
          Name            =   "Î¢ÈíÑÅºÚ"
-         Size            =   9
+         Size            =   12
          Charset         =   134
          Weight          =   400
          Underline       =   0   'False
@@ -138,7 +157,7 @@ Begin VB.Form Form3
       Caption         =   "¡û"
       BeginProperty Font 
          Name            =   "Î¢ÈíÑÅºÚ"
-         Size            =   9
+         Size            =   12
          Charset         =   134
          Weight          =   400
          Underline       =   0   'False
@@ -166,6 +185,11 @@ End Sub
 Private Sub Command2_Click()
 WebBrowser1.Navigate "https://cn.bing.com"
 End Sub
+
+Private Sub Command3_Click()
+Form1.Show
+End Sub
+
 Private Sub EXIT_Click()
 Locker.Show
   HomeAddress = Form3.WebBrowser1.LocationURL
@@ -194,7 +218,7 @@ Private Sub Form_Resize()
     WebBrowser1.Width = Form3.Width - 120
     WebBrowser1.Height = Form3.Height - 1000
 End Sub
-Private Sub WebBrowser1_StatusTextChange(ByVal Text As String)
+Private Sub WebBrowser1_TitleChange(ByVal Text As String)
 Text1.Text = WebBrowser1.LocationURL
 End Sub
 

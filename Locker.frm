@@ -5,7 +5,7 @@ Begin VB.Form Locker
    Caption         =   "Locker"
    ClientHeight    =   7755
    ClientLeft      =   120
-   ClientTop       =   720
+   ClientTop       =   1020
    ClientWidth     =   14595
    BeginProperty Font 
       Name            =   "微软雅黑"
@@ -96,13 +96,13 @@ Begin VB.Form Locker
       Width           =   345
    End
    Begin SHDocVwCtl.WebBrowser WebBrowser1 
-      Height          =   6255
+      Height          =   6735
       Left            =   600
       TabIndex        =   3
-      Top             =   580
+      Top             =   585
       Width           =   13935
       ExtentX         =   24580
-      ExtentY         =   11033
+      ExtentY         =   11880
       ViewMode        =   0
       Offline         =   0
       Silent          =   0
@@ -206,7 +206,7 @@ Begin VB.Form Locker
       Begin VB.Menu Print 
          Caption         =   "打印"
       End
-      Begin VB.Menu File 
+      Begin VB.Menu file 
          Caption         =   "文件"
          Begin VB.Menu NEW 
             Caption         =   "打开"
@@ -266,14 +266,14 @@ Begin VB.Form Locker
             Caption         =   "小窗模式"
          End
          Begin VB.Menu Morden 
-            Caption         =   "Morden模式"
+            Caption         =   "MordenUI模式"
          End
       End
       Begin VB.Menu az 
          Caption         =   "-"
       End
       Begin VB.Menu function 
-         Caption         =   "功能"
+         Caption         =   "工具"
          Begin VB.Menu showphoto 
             Caption         =   "展示图片(非PNG格式）"
          End
@@ -299,17 +299,34 @@ Begin VB.Form Locker
          Caption         =   "退出"
       End
    End
+   Begin VB.Menu flie 
+      Caption         =   "网页"
+      Begin VB.Menu op 
+         Caption         =   "打开"
+      End
+      Begin VB.Menu oppppperate 
+         Caption         =   "操作"
+         Begin VB.Menu bbbbaack 
+            Caption         =   "后退"
+         End
+         Begin VB.Menu fffffffffffffforwardddddd 
+            Caption         =   "前进"
+         End
+         Begin VB.Menu reeefffressssssssshhhh 
+            Caption         =   "刷新"
+         End
+      End
+   End
 End
 Attribute VB_Name = "Locker"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
+Private Declare Function InternetGetConnectedState Lib "wininet.dll" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
 Private Sub ab_Click()
 Form1.Show
 End Sub
-
 Private Sub Bac_Click()
 On Error Resume Next
 WebBrowser1.GoBack
@@ -319,6 +336,12 @@ Private Sub BACK_Click() '返回
     WebBrowser1.GoBack
     GoAdDress.Text = WebBrowser1.LocationURL
 End Sub
+
+Private Sub bbbbaack_Click()
+On Error Resume Next
+WebBrowser1.GoBack
+End Sub
+
 Private Sub Big100_Click()
 On Error Resume Next
 WebBrowser1.Document.body.Style.Zoom = "100%"
@@ -332,8 +355,7 @@ On Error Resume Next
 WebBrowser1.Document.body.Style.Zoom = "150%"
 End Sub
 Private Sub Command1_Click()
-    On Error Resume Next
-    
+On Error Resume Next
 If Not Text1.Text = "about:" Then
 WebBrowser1.Navigate Trim(Text1.Text) '打开网页
 Else
@@ -345,7 +367,7 @@ Form1.Show
 End Sub
 Private Sub Command2_Click()
 On Error Resume Next
-Form2.RichTextBox1.Text = Locker.WebBrowser1.Document.body.innerHTML
+Form2.Text1.Text = Locker.WebBrowser1.Document.body.innerHTML
 Form2.Show
 Form2.Combo1.Text = Locker.WebBrowser1.LocationURL
 End Sub
@@ -357,6 +379,10 @@ ab.Visible = False
 dd.Visible = False
 End Sub
 
+Private Sub fffffffffffffforwardddddd_Click()
+On Error Resume Next
+WebBrowser1.GoForward
+End Sub
 
 Private Sub FORWAR_Click()
 On Error Resume Next
@@ -373,23 +399,18 @@ End Sub
 Private Sub EXIT_Click()
 End
 End Sub
-
 Private Sub Image1_Click()
 On Error Resume Next
 WebBrowser1.Navigate "https://cn.bing.com"
-
 End Sub
-
 Private Sub Image2_Click()
 On Error Resume Next
 WebBrowser1.Navigate "https://fanyi.baidu.com/"
 End Sub
-
 Private Sub Image3_Click()
 On Error Resume Next
 WebBrowser1.Navigate "https://baike.baidu.com"
 End Sub
-
 Private Sub Little25_Click()
 On Error Resume Next
 WebBrowser1.Document.body.Style.Zoom = "25%"
@@ -408,15 +429,22 @@ End Sub
 Private Sub New_Click()
 WebBrowser1.ExecWB OLECMDID_OPEN, OLECMDEXECOPT_DODEFAULT
 End Sub
-
+Private Sub op_Click()
+New_Click
+End Sub
 Private Sub Picture1_Click()
 On Error Resume Next
  WebBrowser1.GoHome '返回主页
 End Sub
-
 Private Sub Print_Click()
 WebBrowser1.ExecWB OLECMDID_PRINT, OLECMDEXECOPT_DODEFAULT
 End Sub
+
+Private Sub reeefffressssssssshhhh_Click()
+On Error Resume Next
+WebBrowser1.REFRESH
+End Sub
+
 Private Sub Save_Click()
 WebBrowser1.ExecWB OLECMDID_SAVEAS, OLECMDEXECOPT_DODEFAULT
 End Sub
@@ -441,12 +469,10 @@ On Error Resume Next
     WebBrowser1.GoForward
     GoAdDress.Text = WebBrowser1.LocationURL
 End Sub
-
 Private Sub Little_Click()
 On Error Resume Next
 Form3.Show
 Locker.Hide
-Form3.Hide
 End Sub
 Private Sub REFRESH_Click() '刷新
 On Error Resume Next
@@ -476,6 +502,7 @@ Private Sub Form_Resize()
     Line2.X2 = WebBrowser1.Left + WebBrowser1.Width
     Line3.X2 = WebBrowser1.Left + WebBrowser1.Width
     Picture1.Top = WebBrowser1.Height - 500
+
     End Sub
 Private Sub Text1_KeyPress(KeyAscii As Integer) '回车键，需要改按钮
     On Error Resume Next
@@ -484,14 +511,20 @@ Private Sub Text1_KeyPress(KeyAscii As Integer) '回车键，需要改按钮
         Text1.Text = Text1.Text
     End If
 End Sub
-
-Private Sub WebBrowser1_StatusTextChange(ByVal Text As String)
+Private Sub WebBrowser1_StatuTextChange()
+On Error Resume Next
+End Sub
+Private Sub WebBrowser1_TitleChange(ByVal Text As String)
 Text1.Text = WebBrowser1.LocationURL
+    If InternetGetConnectedState(0&, 0&) Then
+    Else
+        Form9.Show
+    End If
 End Sub
 Private Sub Text1_Click()
 On Error Resume Next
 Text1.Text = ""
 End Sub
-Private Sub Me_Unload()
+Private Sub Me_Unload(Cancel As Integer)
 End
 End Sub

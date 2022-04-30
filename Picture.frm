@@ -29,7 +29,7 @@ Begin VB.Form Form5
       Height          =   375
       Left            =   5040
       TabIndex        =   2
-      Top             =   3840
+      Top             =   3960
       Width           =   1215
    End
    Begin VB.CommandButton Command1 
@@ -46,17 +46,17 @@ Begin VB.Form Form5
       Height          =   375
       Left            =   3600
       TabIndex        =   1
-      Top             =   3840
+      Top             =   3960
       Width           =   1335
    End
    Begin SHDocVwCtl.WebBrowser WebBrowser1 
-      Height          =   3615
+      Height          =   3855
       Left            =   0
       TabIndex        =   0
       Top             =   0
       Width           =   6375
       ExtentX         =   11245
-      ExtentY         =   6376
+      ExtentY         =   6800
       ViewMode        =   0
       Offline         =   0
       Silent          =   0

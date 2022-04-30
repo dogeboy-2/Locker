@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}#1.1#0"; "ieframe.dll"
 Begin VB.Form zhuan 
-   BackColor       =   &H80000007&
+   BackColor       =   &H80000005&
    BorderStyle     =   0  'None
    Caption         =   "×¨×¢Ä£Ê½"
    ClientHeight    =   10800
@@ -50,10 +50,10 @@ Begin VB.Form zhuan
       Width           =   855
    End
    Begin VB.TextBox Text1 
-      BorderStyle     =   0  'None
+      Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Î¢ÈíÑÅºÚ"
-         Size            =   14.25
+         Size            =   12
          Charset         =   134
          Weight          =   400
          Underline       =   0   'False

@@ -45,20 +45,30 @@ Begin VB.Form WinFansFalse
       Caption         =   "你使用的是盗版，请至https://winfans.lanzouo.com/b02oipmeb（密码：1waq)下载正版软件,否则将影响您的正常使用"
       ForeColor       =   &H00000000&
       Height          =   1170
-      Left            =   480
+      Left            =   720
       TabIndex        =   1
-      Top             =   1080
+      Top             =   1200
       Width           =   3885
    End
    Begin VB.Label lblTitle 
       BackStyle       =   0  'Transparent
       Caption         =   "Locker盗版"
+      BeginProperty Font 
+         Name            =   "微软雅黑"
+         Size            =   12
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       ForeColor       =   &H00000000&
       Height          =   480
-      Left            =   480
+      Left            =   720
       TabIndex        =   2
-      Top             =   360
+      Top             =   480
       Width           =   3885
+      WordWrap        =   -1  'True
    End
    Begin VB.Line Line1 
       BorderColor     =   &H00FFFFFF&

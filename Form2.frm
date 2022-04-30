@@ -1,5 +1,4 @@
 VERSION 5.00
-Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "richtx32.ocx"
 Begin VB.Form Form2 
    BackColor       =   &H8000000E&
    BorderStyle     =   1  'Fixed Single
@@ -15,6 +14,24 @@ Begin VB.Form Form2
    ScaleHeight     =   8010
    ScaleWidth      =   13230
    StartUpPosition =   2  'ÆÁÄ»ÖÐÐÄ
+   Begin VB.TextBox Text1 
+      BeginProperty Font 
+         Name            =   "Î¢ÈíÑÅºÚ"
+         Size            =   9
+         Charset         =   134
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   7215
+      Left            =   0
+      MultiLine       =   -1  'True
+      ScrollBars      =   2  'Vertical
+      TabIndex        =   2
+      Top             =   720
+      Width           =   13215
+   End
    Begin VB.ComboBox Combo1 
       BeginProperty Font 
          Name            =   "Î¢ÈíÑÅºÚ"
@@ -27,30 +44,10 @@ Begin VB.Form Form2
       EndProperty
       Height          =   420
       Left            =   2040
-      TabIndex        =   2
+      TabIndex        =   1
       Text            =   "Combo1"
       Top             =   120
       Width           =   10455
-   End
-   Begin RichTextLib.RichTextBox RichTextBox1 
-      Height          =   7335
-      Left            =   0
-      TabIndex        =   0
-      Top             =   720
-      Width           =   13215
-      _ExtentX        =   23310
-      _ExtentY        =   12938
-      _Version        =   393217
-      TextRTF         =   $"Form2.frx":1084A
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Î¢ÈíÑÅºÚ"
-         Size            =   9
-         Charset         =   134
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
    End
    Begin VB.Label Label1 
       BackStyle       =   0  'Transparent
@@ -66,7 +63,7 @@ Begin VB.Form Form2
       EndProperty
       Height          =   375
       Left            =   840
-      TabIndex        =   1
+      TabIndex        =   0
       Top             =   120
       Width           =   975
    End
@@ -78,5 +75,9 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Form_Load()
 Me.Caption = "Ô´´úÂë - " + Locker.WebBrowser1.LocationURL
+End Sub
+
+Private Sub RichTextBox1_Change()
+
 End Sub
 
