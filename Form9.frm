@@ -1,9 +1,9 @@
 VERSION 5.00
 Begin VB.Form Form9 
    BackColor       =   &H80000005&
-   BorderStyle     =   1  'Fixed Single
+   BorderStyle     =   3  'Fixed Dialog
    Caption         =   "无法连接至 Internet"
-   ClientHeight    =   2370
+   ClientHeight    =   2175
    ClientLeft      =   45
    ClientTop       =   390
    ClientWidth     =   6600
@@ -11,8 +11,9 @@ Begin VB.Form Form9
    LinkTopic       =   "Form9"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   2370
+   ScaleHeight     =   2175
    ScaleWidth      =   6600
+   ShowInTaskbar   =   0   'False
    StartUpPosition =   2  '屏幕中心
    Begin VB.CommandButton Command3 
       Caption         =   "控制面板"
@@ -78,7 +79,7 @@ Begin VB.Form Form9
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H8000000D&
+      ForeColor       =   &H80000007&
       Height          =   615
       Left            =   120
       TabIndex        =   3
@@ -95,20 +96,15 @@ Private Declare Function SetWindowPos Lib "user32" (ByVal hwnd As Long, ByVal hW
 Private Const HWND_TOPMOST& = -1
 Private Const SWP_NOSIZE& = &H1
 Private Const SWP_NOMOVE& = &H2
-
 Private Sub Command1_Click()
 Unload Me
-Locker.WebBrowser1.Navigate (Locker.WebBrowser1.LocationURL)
 End Sub
-
 Private Sub Command2_Click()
 Shell "explorer.exe shell:::{7007ACC7-3202-11D1-AAD2-00805FC1270E}", 1
 End Sub
-
 Private Sub Command3_Click()
 Shell "explorer.exe shell:::{8E908FC9-BECC-40f6-915B-F4CA0E70D03D}", 1
 End Sub
-
 Private Sub Form_Load()
 SetWindowPos Me.hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE Or SWP_NOSIZE
 End Sub

@@ -15,6 +15,14 @@ Begin VB.Form Form4
    ScaleWidth      =   10125
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'ÆÁÄ»ÖÐÐÄ
+   Begin VB.Timer Timer6 
+      Left            =   5040
+      Top             =   2280
+   End
+   Begin VB.Timer Timer5 
+      Left            =   5280
+      Top             =   3960
+   End
    Begin VB.Timer Timer4 
       Left            =   4320
       Top             =   3960
@@ -44,7 +52,7 @@ Begin VB.Form Form4
       Caption         =   "Locker X"
       BeginProperty Font 
          Name            =   "Î¢ÈíÑÅºÚ"
-         Size            =   72
+         Size            =   65.25
          Charset         =   134
          Weight          =   700
          Underline       =   0   'False
@@ -72,28 +80,54 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
+Private Declare Function InternetGetConnectedState Lib "wininet.dll" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
 Private Sub Timer2_Timer()
 Label1.Left = 3120
 Timer3.Enabled = True
-Timer3.Interval = 20
+Timer3.Interval = 6
 End Sub
 Private Sub Timer1_Timer()
 Label1.Visible = True
 Timer2.Enabled = True
-Timer2.Interval = 65
+Timer2.Interval = 6
 End Sub
 Private Sub Form_Load()
 Timer1.Enabled = True
 Timer1.Interval = 80
+Locker.WebBrowser1.gohome
+Locker.Text1.Width = 11175
+Set W = CreateObject("wscript.shell")
+W.regwrite "HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION\" & App.EXEName + ".exe", "11000", "REG_DWORD"
+Set W = Nothing
+Dim webnet As String
+webnet = VBA.Command
+If Not webnet = "" Then
+Locker.WebBrowser1.Navigate webnet
+End If
+Locker.Text1.Text = Locker.WebBrowser1.LocationURL
+    If InternetGetConnectedState(0&, 0&) Then
+      Locker.Picture3.Visible = False
+    Else
+        Locker.Picture3.Visible = True
+    End If
+Locker.Caption = Locker.WebBrowser1.LocationName + " - Locker"
 End Sub
 Private Sub Timer3_Timer()
 Label1.ForeColor = &H8000000C
 Timer4.Enabled = True
-Timer4.Interval = 1000
+Timer4.Interval = 6
 End Sub
-
 Private Sub Timer4_Timer()
+Timer5.Enabled = True
+Timer5.Interval = 10
+End Sub
+Private Sub Timer5_Timer()
+Label1.FontSize = "72"
+Timer6.Enabled = True
+Timer6.Interval = 110
+End Sub
+Private Sub Timer6_Timer()
+Me.Left = -30
 Unload Me
 Locker.Show
 End Sub

@@ -3,11 +3,11 @@ Object = "{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}#1.1#0"; "ieframe.dll"
 Begin VB.Form Form3 
    BackColor       =   &H8000000E&
    BorderStyle     =   1  'Fixed Single
-   Caption         =   "                                                                                                                      小窗模式"
+   Caption         =   "小窗模式"
    ClientHeight    =   8595
    ClientLeft      =   4245
    ClientTop       =   2490
-   ClientWidth     =   13515
+   ClientWidth     =   12315
    ControlBox      =   0   'False
    FillColor       =   &H00FFFFFF&
    Icon            =   "Form3.frx":0000
@@ -15,10 +15,10 @@ Begin VB.Form Form3
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   8595
-   ScaleWidth      =   13515
+   ScaleWidth      =   12315
    StartUpPosition =   2  '屏幕中心
-   Begin VB.CommandButton Command3 
-      Caption         =   "关于"
+   Begin VB.CommandButton Command4 
+      Caption         =   "停止"
       BeginProperty Font 
          Name            =   "微软雅黑"
          Size            =   9
@@ -29,9 +29,9 @@ Begin VB.Form Form3
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   10680
+      Left            =   10560
       TabIndex        =   8
-      Top             =   0
+      Top             =   120
       Width           =   735
    End
    Begin VB.CommandButton Command2 
@@ -46,9 +46,9 @@ Begin VB.Form Form3
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   9840
+      Left            =   9720
       TabIndex        =   7
-      Top             =   0
+      Top             =   120
       Width           =   735
    End
    Begin VB.CommandButton Command1 
@@ -65,13 +65,13 @@ Begin VB.Form Form3
       Height          =   375
       Left            =   8880
       TabIndex        =   6
-      Top             =   0
-      Width           =   855
+      Top             =   120
+      Width           =   735
    End
    Begin VB.TextBox Text1 
       BeginProperty Font 
          Name            =   "微软雅黑"
-         Size            =   9
+         Size            =   10.5
          Charset         =   134
          Weight          =   400
          Underline       =   0   'False
@@ -81,17 +81,17 @@ Begin VB.Form Form3
       Height          =   375
       Left            =   1800
       TabIndex        =   5
-      Top             =   0
+      Top             =   120
       Width           =   6975
    End
    Begin SHDocVwCtl.WebBrowser WebBrowser1 
-      Height          =   6015
+      Height          =   6735
       Left            =   0
       TabIndex        =   4
-      Top             =   480
-      Width           =   10215
-      ExtentX         =   18018
-      ExtentY         =   10610
+      Top             =   600
+      Width           =   12285
+      ExtentX         =   21669
+      ExtentY         =   11880
       ViewMode        =   0
       Offline         =   0
       Silent          =   0
@@ -115,7 +115,7 @@ Begin VB.Form Form3
       Height          =   375
       Left            =   5160
       TabIndex        =   3
-      Top             =   0
+      Top             =   120
       Width           =   735
    End
    Begin VB.CommandButton EXIT 
@@ -130,10 +130,10 @@ Begin VB.Form Form3
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   11520
+      Left            =   11400
       MaskColor       =   &H00808080&
       TabIndex        =   2
-      Top             =   0
+      Top             =   120
       Width           =   735
    End
    Begin VB.CommandButton FORWARD 
@@ -150,7 +150,7 @@ Begin VB.Form Form3
       Height          =   375
       Left            =   960
       TabIndex        =   1
-      Top             =   0
+      Top             =   120
       Width           =   735
    End
    Begin VB.CommandButton BACK 
@@ -167,7 +167,7 @@ Begin VB.Form Form3
       Height          =   375
       Left            =   120
       TabIndex        =   0
-      Top             =   0
+      Top             =   120
       Width           =   735
    End
 End
@@ -176,6 +176,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Private Declare Function InternetGetConnectedState Lib "wininet.dll" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
 Private Sub BACK_Click()
  WebBrowser1.GoBack
 End Sub
@@ -185,11 +186,9 @@ End Sub
 Private Sub Command2_Click()
 WebBrowser1.Navigate "https://cn.bing.com"
 End Sub
-
-Private Sub Command3_Click()
-Form1.Show
+Private Sub Command4_Click()
+WebBrowser1.stop
 End Sub
-
 Private Sub EXIT_Click()
 Locker.Show
   HomeAddress = Form3.WebBrowser1.LocationURL
@@ -220,5 +219,30 @@ Private Sub Form_Resize()
 End Sub
 Private Sub WebBrowser1_TitleChange(ByVal Text As String)
 Text1.Text = WebBrowser1.LocationURL
+If WebBrowser1.Busy = True Then
+Text1.ForeColor = &H808080
+Else
+Text1.ForeColor = &H0&
+End If
+If InternetGetConnectedState(0&, 0&) Then
+Else
+Form9.Show
+End If
 End Sub
-
+Private Sub Text1_KeyPress(KeyAscii As Integer) '回车键，需要改按钮
+    On Error Resume Next
+    If KeyAscii = vbKeyReturn Then
+        Go_Click
+        Text1.Text = Text1.Text
+    End If
+    If Text1.ForeColor = &H808080 Then
+Text1.ForeColor = &H0&
+End If
+End Sub
+Private Sub Text1_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+On Error Resume Next
+'如果单击搜索框，让搜索文字消失
+If Text1.ForeColor = &H808080 Then
+Text1.ForeColor = &H0&
+End If
+End Sub
